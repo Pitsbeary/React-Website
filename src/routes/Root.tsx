@@ -6,6 +6,8 @@ import { ICategoryListItem } from '../types/Category';
 import { IArticleListItem } from '../types/Article';
 import ArticleList from '../components/domain/ArticleList/ArticleList';
 import Section from '../components/shared/Sections/Section/Section';
+import { chunkArray } from '../shared/scripts/utils';
+import { ScrollableListDirection } from '../components/shared/Lists/ScrollableList/ScrollableList';
 
 export default function Root() {
   const [categories, updateCategories] = useState<ICategoryListItem[]>([]);
@@ -50,8 +52,11 @@ export default function Root() {
   }, []);
 
   const categoryList = categories && (<CategoryList categories={ categories }></CategoryList>);
-  const articleList = articles && (<ArticleList articles={ articles }></ArticleList>);
-
+  const articleLists = articles && (
+    chunkArray(articles, 10).map((articlesChunk: IArticleListItem[], index: number) => {
+      return (<ArticleList articles={articlesChunk} listDirection={index % 2 === 0 ? ScrollableListDirection.Left : ScrollableListDirection.Right}></ArticleList>)
+    })
+  );
 
   return (
     <LayoutMain>
@@ -68,7 +73,7 @@ export default function Root() {
         <Section>
           <h2 className="section-title"> Articles </h2>
           <p className="section-subtitle"> Select category from the list</p>
-          { articleList }
+          { articleLists }
         </Section>
       </article>
 

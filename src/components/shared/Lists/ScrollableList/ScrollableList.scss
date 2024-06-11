@@ -24,8 +24,10 @@
     }
 
     .scrollable-list {
-        @extend .animation-scroll-left--semi-slow;
-
+        &--left {
+            @extend .animation-scroll-left--semi-slow;
+        }
+        
         &--right {
             @extend .animation-scroll-right--semi-slow;
         }

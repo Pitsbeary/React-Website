@@ -1,14 +1,14 @@
 import { ICategoryListItem } from "../../../types/Category";
-import ScrollableList from "../../shared/Lists/ScrollableList/ScrollableList";
+import ScrollableList, { ScrollableListDirection } from "../../shared/Lists/ScrollableList/ScrollableList";
 
 import CategoryListItem from "./CategoryListItem";
 
-export default function CategoryList({ categories } : { categories: ICategoryListItem[] }) {
+export default function CategoryList({ categories, listDirection = ScrollableListDirection.Left } : { categories: ICategoryListItem[], listDirection?: ScrollableListDirection }) {
     
     return (
         <ScrollableList listItems={categories.map((category, index) => {
             return ( <CategoryListItem key={index} category={category}/> );
-        })}></ScrollableList>
+        })} listDirection={listDirection}></ScrollableList>
     );        
     
 }

@@ -1,12 +1,12 @@
 import { IArticleListItem } from "../../../types/Article";
 
 import ArticleListItem from "./ArticleListItem";
-import ScrollableList from "../../shared/Lists/ScrollableList/ScrollableList";
+import ScrollableList, { ScrollableListDirection } from "../../shared/Lists/ScrollableList/ScrollableList";
 
-export default function ArticleList({ articles } : { articles: IArticleListItem[] }) {    
+export default function ArticleList({ articles, listDirection = ScrollableListDirection.Left } : { articles: IArticleListItem[], listDirection?: ScrollableListDirection }) {    
     return (
         <ScrollableList listItems={articles.map((article) => {
             return ( <ArticleListItem article={article}></ArticleListItem> );
-        })}></ScrollableList>
+        })} listDirection={listDirection}></ScrollableList>
     );
 }
