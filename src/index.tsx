@@ -1,10 +1,9 @@
 import React, { useContext, useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
 
-import './routes/Article/Article.scss';
-
 import './components/shared/Buttons/Pill/Pill.scss';
 
+import './components/shared/Sections/Section/Section.scss';
 import './components/shared/Lists/ScrollableList/ScrollableList.scss';
 import './components/shared/Lists/ScrollableList/ScrollableListItem.scss';
 

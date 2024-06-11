@@ -1,10 +1,15 @@
 import { useEffect, useState } from 'react';
 import CategoryList from '../components/domain/CategoryList/CategoryList';
 import LayoutMain from '../layout/Main';
+
 import { ICategoryListItem } from '../types/Category';
+import { IArticleListItem } from '../types/Article';
+import ArticleList from '../components/domain/ArticleList/ArticleList';
+import Section from '../components/shared/Sections/Section/Section';
 
 export default function Root() {
   const [categories, updateCategories] = useState<ICategoryListItem[]>([]);
+  const [articles, updateArticles] = useState<IArticleListItem[]>([]);
     
   useEffect(() => {
       const fetchCategories = async () => {
@@ -25,17 +30,46 @@ export default function Root() {
       fetchCategories();    
   }, []);
 
+  useEffect(() => {
+    const fetchArticles = async () => {
+        try {
+            const response = await fetch('/data/articles.json');
+
+            if (!response.ok) {
+                throw new Error('Failed to fetch data');
+            }
+
+            const articlesData = await response.json();
+            updateArticles(articlesData);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    fetchArticles();
+  }, []);
+
   const categoryList = categories && (<CategoryList categories={ categories }></CategoryList>);
+  const articleList = articles && (<ArticleList articles={ articles }></ArticleList>);
+
 
   return (
     <LayoutMain>
       <article className="page page-home">
-          <h1 className="page__title"> Home </h1>
-          <p className="page__subtitle"> Select category from the list</p>
-
+        <Section>
+          <h1 className="section-title"> Home </h1>
+          <p className="section-subtitle"> Select category from the list</p>
+        </Section>
+        <Section>
+          <h2 className="section-title"> Categories </h2>
+          <p className="section-subtitle"> Select category from the list</p>
           { categoryList }
-
-          {/* Todo: Add article lists with articles split into categories */}
+        </Section>
+        <Section>
+          <h2 className="section-title"> Articles </h2>
+          <p className="section-subtitle"> Select category from the list</p>
+          { articleList }
+        </Section>
       </article>
 
       
