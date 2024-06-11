@@ -5,8 +5,11 @@ import ScrollableList, { ScrollableListDirection } from "../../shared/Lists/Scro
 
 export default function ArticleList({ articles, listDirection = ScrollableListDirection.Left } : { articles: IArticleListItem[], listDirection?: ScrollableListDirection }) {    
     return (
-        <ScrollableList listItems={articles.map((article) => {
+        <div className='article-list'>
+            <ScrollableList listItems={articles.map((article) => {
             return ( <ArticleListItem article={article}></ArticleListItem> );
-        })} listDirection={listDirection}></ScrollableList>
+            })} listDirection={listDirection}></ScrollableList>
+        </div>
+        
     );
 }

@@ -6,9 +6,11 @@ import CategoryListItem from "./CategoryListItem";
 export default function CategoryList({ categories, listDirection = ScrollableListDirection.Left } : { categories: ICategoryListItem[], listDirection?: ScrollableListDirection }) {
     
     return (
-        <ScrollableList listItems={categories.map((category, index) => {
-            return ( <CategoryListItem key={index} category={category}/> );
-        })} listDirection={listDirection}></ScrollableList>
+        <div className='category-list'>
+            <ScrollableList listItems={categories.map((category, index) => {
+                return ( <CategoryListItem key={index} category={category}/> );
+            })} listDirection={listDirection}></ScrollableList>
+        </div>
     );        
     
 }
