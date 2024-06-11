@@ -1,0 +1,25 @@
+@import './variables.scss';
+
+.theme-light {
+  --color-text-primary: #{$color-black};
+  --color-background-primary: #{$color-white};
+
+  --color-heading-primary: #{$color-primary};
+  --color-outline-primary: #{$color-primary};
+}
+
+.theme-dark {
+  --color-text-primary: #{$color-white};
+  --color-background-primary: #{$color-black};
+
+  --color-heading-primary: #{$color-secondary-light};
+  --color-outline-primary: #{$color-white};
+}
+
+body {
+  background-color: var(--color-background-primary);
+}
+
+:root {
+  @extend .theme-light;
+}

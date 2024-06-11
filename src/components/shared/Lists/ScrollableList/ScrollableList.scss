@@ -1,0 +1,39 @@
+@import '../../../../shared/styles/animations.scss';
+
+.scrollable-list-container {
+    display: flex;
+    flex-direction: row;
+
+    column-gap: 4px;
+
+    flex-shrink: 0;
+    width: 100%;
+
+    overflow: hidden;
+
+    .scrollable-list {
+        display: flex;
+        flex-direction: row;
+
+        column-gap: 4px;
+
+        flex: 1 0 auto;
+        
+        min-width: 100%;
+        margin: 0 auto;
+    }
+
+    .scrollable-list {
+        @extend .animation-scroll-left--semi-slow;
+
+        &--right {
+            @extend .animation-scroll-right--semi-slow;
+        }
+    }
+
+    &.paused {
+        .scrollable-list {
+            animation-play-state: paused;
+        }
+    }
+}

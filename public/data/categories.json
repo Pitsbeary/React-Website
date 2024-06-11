@@ -1,0 +1,52 @@
+[
+  {
+    "title": "Health",
+    "description": "Ways to maintain physical wellness.",
+    "slug": "health"
+  },
+  {
+    "title": "Travel",
+    "description": "Exciting destinations and travel insights.",
+    "slug": "travel"
+  },
+  {
+    "title": "Home",
+    "description": "Cozy living space inspiration.",
+    "slug": "home"
+  },
+  {
+    "title": "Mindfulness",
+    "description": "Stress reduction and present-moment awareness.",
+    "slug": "mindfulness"
+  },
+  {
+    "title": "Finance",
+    "description": "Money management for financial goals.",
+    "slug": "finance"
+  },
+  {
+    "title": "Fitness",
+    "description": "Exercise motivation and staying active.",
+    "slug": "fitness"
+  },
+  {
+    "title": "Food",
+    "description": "Delicious recipes and nutrition advice.",
+    "slug": "food"
+  },
+  {
+    "title": "Pets",
+    "description": "Best practices for pet care.",
+    "slug": "pets"
+  },
+  {
+    "title": "Arts",
+    "description": "Creative exploration and self-expression.",
+    "slug": "arts"
+  },
+  {
+    "title": "Adventure",
+    "description": "Outdoor escapades and new experiences.",
+    "slug": "adventure"
+  }
+]

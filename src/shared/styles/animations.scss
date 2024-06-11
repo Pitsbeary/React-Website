@@ -1,0 +1,75 @@
+@keyframes scroll-left {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+@keyframes scroll-right {
+    from {
+        transform: translateX(-100%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+.animation-scroll-left {
+    animation: scroll-left 20s linear 0s infinite;
+
+    &--very-slow {
+        animation: scroll-left 600s linear 0s infinite;
+    }
+
+    &--slow {
+        animation: scroll-left 300s linear 0s infinite;
+    }
+
+    &--semi-slow {
+        animation: scroll-left 150s linear 0s infinite;
+    }
+
+    &--semi-fast {
+        animation: scroll-left 50s linear 0s infinite;
+    }
+
+    &--fast {
+        animation: scroll-left 10s linear 0s infinite;
+    }
+
+    &--very-fast {
+        animation: scroll-left 5s linear 0s infinite;
+    }
+}
+
+.animation-scroll-right {
+    animation: scroll-right 20s linear 0s infinite;
+
+    &--very-slow {
+        animation: scroll-right 600s linear 0s infinite;
+    }
+
+    &--slow {
+        animation: scroll-right 300s linear 0s infinite;
+    }
+
+    &--semi-slow {
+        animation: scroll-right 150s linear 0s infinite;
+    }
+
+    &--semi-fast {
+        animation: scroll-right 50s linear 0s infinite;
+    }
+
+    &--fast {
+        animation: scroll-right 10s linear 0s infinite;
+    }
+
+    &--very-fast {
+        animation: scroll-right 5s linear 0s infinite;
+    }
+}
