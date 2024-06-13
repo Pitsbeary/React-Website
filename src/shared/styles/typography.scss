@@ -51,3 +51,11 @@ h6, .h6 {
 
     color: var(--color-heading-primary);
 }
+
+.text-link {
+    color: var(--color-heading-primary);
+
+    &:hover {
+        text-decoration: underline;
+    }
+}

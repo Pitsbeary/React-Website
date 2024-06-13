@@ -8,6 +8,8 @@ import ArticleList from '../components/domain/ArticleList/ArticleList';
 import Section from '../components/shared/Sections/Section/Section';
 import { chunkArray } from '../shared/scripts/utils';
 import { ScrollableListDirection } from '../components/shared/Lists/ScrollableList/ScrollableList';
+import { getArticlesFromCateogry } from '../lib/wikipedia/api/articles';
+import { getCategories } from '../lib/wikipedia/static/categories';
 
 export default function Root() {
   const [categories, updateCategories] = useState<ICategoryListItem[]>([]);
@@ -16,14 +18,8 @@ export default function Root() {
   useEffect(() => {
       const fetchCategories = async () => {
           try {
-              const response = await fetch('/data/categories.json');
-
-              if (!response.ok) {
-                  throw new Error('Failed to fetch data');
-              }
-
-              const categoriesData = await response.json();
-              updateCategories(categoriesData);
+            const categories: ICategoryListItem[] = await getCategories();
+            updateCategories(categories);
           } catch (error) {
               console.error(error);
           }
@@ -34,46 +30,43 @@ export default function Root() {
 
   useEffect(() => {
     const fetchArticles = async () => {
+        const articlesTotal: IArticleListItem[] = [];
+        
         try {
-            const response = await fetch('/data/articles.json');
-
-            if (!response.ok) {
-                throw new Error('Failed to fetch data');
+            for(const category of categories) {
+              const articles = await getArticlesFromCateogry(category.title);
+              articlesTotal.push(...articles);
             }
-
-            const articlesData = await response.json();
-            updateArticles(articlesData);
         } catch (error) {
             console.error(error);
         }
+
+        updateArticles(articlesTotal);
     };
 
     fetchArticles();
-  }, []);
-
-  const categoryList = categories && (<CategoryList categories={ categories }></CategoryList>);
-  const articleLists = articles && (
-    chunkArray(articles, 10).map((articlesChunk: IArticleListItem[], index: number) => {
-      return (<ArticleList articles={articlesChunk} listDirection={index % 2 === 0 ? ScrollableListDirection.Left : ScrollableListDirection.Right}></ArticleList>)
-    })
-  );
+  }, [categories]);
 
   return (
     <LayoutMain>
       <article className="page page-home">
         <Section>
-          <h1 className="section-title"> Home </h1>
-          <p className="section-subtitle"> Select category from the list</p>
+          <h1 className="section__title"> Home </h1>
+          <p className="section__subtitle"> Select category from the list</p>
         </Section>
         <Section>
-          <h2 className="section-title"> Categories </h2>
-          <p className="section-subtitle"> Select category from the list</p>
-          { categoryList }
+          <h2 className="section__title"> Categories </h2>
+          <p className="section__subtitle"> Select category from the list</p>
+          { categories && (<CategoryList categories={ categories }></CategoryList>) }
         </Section>
         <Section>
-          <h2 className="section-title"> Articles </h2>
-          <p className="section-subtitle"> Select category from the list</p>
-          { articleLists }
+          <h2 className="section__title"> Articles </h2>
+          <p className="section__subtitle"> Select article from the list</p>
+          { articles && (
+            chunkArray(articles, 10).map((articlesChunk: IArticleListItem[], index: number) => {
+              return (<ArticleList articles={articlesChunk} listDirection={index % 2 === 0 ? ScrollableListDirection.Left : ScrollableListDirection.Right}></ArticleList>)
+            })
+          ) }
         </Section>
       </article>
 

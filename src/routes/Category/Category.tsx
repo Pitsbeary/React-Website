@@ -1,30 +1,31 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { ICategoryListItem } from "../../types/Category";
+import { ICategoryItem } from "../../types/Category";
 import LayoutMain from "../../layout/Main";
-import { IArticleListItem } from "../../types/Article";
+import { IArticleListItem, IArticleItem } from "../../types/Article";
 import ArticleList from "../../components/domain/ArticleList/ArticleList";
+import { getCategory } from "../../lib/wikipedia/api/categories";
+import { getArticle, getArticlesFromCateogry } from "../../lib/wikipedia/api/articles";
+import Section from "../../components/shared/Sections/Section/Section";
+
 
 export default function Category() {    
     const { slug } = useParams();
 
-    const [articles, updateArticles] = useState<IArticleListItem[]>([]);
-    const [category, updateCategory] = useState<ICategoryListItem|null>(null);
+    const [category, updateCategory] = useState<ICategoryItem|null>(null);
+
+    const [categoryMainArticle, updateCategoryMainArticle] = useState<IArticleItem|null>(null);
+    const [categoryArticles, updateCategoryArticles] = useState<IArticleListItem[]>([]);
 
     useEffect(() => {
         const fetchCategory = async () => {
+            if(!slug) {
+                return;
+            }
+
             try {
-                const response = await fetch('/data/categories.json');
-
-                if (!response.ok) {
-                    throw new Error('Failed to fetch data');
-                }
-
-                const categoriesData = await response.json();
-                const category = categoriesData.find((category: ICategoryListItem) => {
-                    return category.slug === slug;
-                })
-
+                const category: ICategoryItem | null = await getCategory(slug);
+                console.log(category);
                 updateCategory(category);
             } catch (error) {
                 console.error(error);
@@ -35,36 +36,56 @@ export default function Category() {
     }, [slug]);
 
     useEffect(() => {
-        const fetchArticles = async () => {
+        const fetchCategoryArticles = async () => {
+            if(!slug || !category) {
+                return;
+            }
+
             try {
-                const response = await fetch('/data/articles.json');
-
-                if (!response.ok) {
-                    throw new Error('Failed to fetch data');
-                }
-
-                const articlesData = await response.json();
-                const articles = articlesData.filter((article: IArticleListItem) => {
-                    return article.category === category?.title;
-                });
-                
-                updateArticles(articles);
+                const articles: IArticleListItem[] = await getArticlesFromCateogry(slug);
+                updateCategoryArticles(articles);
             } catch (error) {
                 console.error(error);
             }
         };
 
-        fetchArticles();
-    }, [category]);
+        fetchCategoryArticles();
+    }, [slug, category]);
 
+    useEffect(() => {
+        const fetchCategoryMainArticle = async () => {
+            if(!categoryArticles) {
+                return;
+            }
+
+            try {
+                const article: IArticleItem | null = await getArticle(categoryArticles[0]?.title);
+                updateCategoryMainArticle(article);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        fetchCategoryMainArticle();
+    }, [categoryArticles]);
 
     return category && (
         <LayoutMain>
             <article className="page page-category">
-                <h1 className="page__title">{ category.title }</h1>
-                <p className="page__subtitle">{ category.description }</p>
+                { category && categoryMainArticle && (
+                    <Section>
+                        <h1 className="section__title">{ category.title }</h1>
+                        <p className="section__subtitle">{ category.extract }</p>
+                    </Section>        
+                ) }
 
-                <ArticleList articles={ articles }></ArticleList>
+                { categoryArticles && (<Section>
+                    <h2 className="section__title"> Articles </h2>
+                    <p className="section__subtitle"> Select article from the list</p>
+
+                    <ArticleList articles={ categoryArticles }></ArticleList>
+                </Section>) }
+                
             </article>
         </LayoutMain>
     );

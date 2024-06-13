@@ -1,8 +1,11 @@
 export type IArticleListItem = {
-    title: string;
-    slug: string;
+  title: string;
+  slug: string;
+};
 
-    description: string;
+export type IArticleItem = {
+  title: string;
+  slug: string;
 
-    category?: string;
-}
+  extract: string;
+};

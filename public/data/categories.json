@@ -2,51 +2,51 @@
   {
     "title": "Health",
     "description": "Ways to maintain physical wellness.",
-    "slug": "health"
+    "slug": "Health"
   },
   {
     "title": "Travel",
     "description": "Exciting destinations and travel insights.",
-    "slug": "travel"
+    "slug": "Travel"
   },
   {
     "title": "Home",
     "description": "Cozy living space inspiration.",
-    "slug": "home"
+    "slug": "Home"
   },
   {
     "title": "Mindfulness",
     "description": "Stress reduction and present-moment awareness.",
-    "slug": "mindfulness"
+    "slug": "Mindfulness"
   },
   {
     "title": "Finance",
     "description": "Money management for financial goals.",
-    "slug": "finance"
+    "slug": "Finance"
   },
   {
-    "title": "Fitness",
+    "title": "Bodybuilding",
     "description": "Exercise motivation and staying active.",
-    "slug": "fitness"
+    "slug": "Bodybuilding"
   },
   {
-    "title": "Food",
+    "title": "Foods",
     "description": "Delicious recipes and nutrition advice.",
-    "slug": "food"
+    "slug": "Foods"
   },
   {
     "title": "Pets",
     "description": "Best practices for pet care.",
-    "slug": "pets"
+    "slug": "Pets"
   },
   {
-    "title": "Arts",
+    "title": "Art",
     "description": "Creative exploration and self-expression.",
-    "slug": "arts"
+    "slug": "Art"
   },
   {
-    "title": "Adventure",
-    "description": "Outdoor escapades and new experiences.",
-    "slug": "adventure"
+    "title": "Digital Media",
+    "description": "Digital media and other stuff",
+    "slug": "Digital_media"
   }
 ]

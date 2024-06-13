@@ -1,11 +1,17 @@
 .section {
     margin-bottom: 2rem;
-}
 
-.section-title {
-    margin-bottom: 0.2rem;
-}
+    &__title {
+        width: 100%;
 
-.section-subtitle {
-    margin-bottom: 1rem;
+        padding: 0 1rem;
+        margin-bottom: 1rem;
+    }
+
+    &__subtitle {
+        width: 100%;
+
+        padding: 0 1rem;
+        margin-bottom: 1rem;
+    }
 }

@@ -17,5 +17,9 @@
     &:hover {
         color: var(--color-background-primary);
         background-color: var(--color-outline-primary);
+
+        a {
+            color: var(--color-background-primary);
+        }
     }
 }
